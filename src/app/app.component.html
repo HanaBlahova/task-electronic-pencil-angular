@@ -1,0 +1,80 @@
+<div class="header">
+  <div class="header__logo">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="35"
+      height="35"
+      fill="currentColor"
+      class="header__icon bi bi-pencil-fill"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"
+      />
+    </svg>
+    <h1 class="header__title">Electronic Pencil</h1>
+  </div>
+  <div class="header__button-box">
+    <button class="header__btn btn btn-dark">
+      <label class="header__input-label">
+        <span class="header__input-label__title">Choose Image</span>
+        <input
+          #inputFile
+          class="header__input-label__input"
+          type="file"
+          accept="image/*"
+          id="file_input"
+          (change)="selectFile($event)"
+        />
+      </label>
+    </button>
+  </div>
+</div>
+<div class="screen">
+  <p *ngIf="errorMsg" class="message message--danger">
+    {{ errorMsg }}
+  </p>
+  <div class="screen__canvas-container">
+    <div class="screen__canvas-container__buttons">
+      <div class="screen__canvas-container__buttons-box">
+        <button class="btn btn-secondary" (click)="addLine(); erase = false">
+          Draw Line
+        </button>
+        <button class="btn btn-secondary" (click)="addLine(); erase = true">
+          Eraser
+        </button>
+      </div>
+      <div class="screen__canvas-container__buttons-box">
+        <button class="btn btn-secondary" (click)="clearStage()">
+          Clear All
+        </button>
+        <button
+          class="btn btn-secondary"
+          (click)="onDownloadImage()"
+          [disabled]="!shapes || shapes?.length === 0"
+        >
+          Download Image
+        </button>
+      </div>
+    </div>
+    <div id="container"></div>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer__button-box">
+    <button
+      type="button"
+      class="footer__button btn btn-dark"
+      [disabled]="!shapes || shapes?.length === 0"
+      (click)="onSendImage()"
+    >
+      Send Image
+    </button>
+    <p *ngIf="successMsg && submitted" class="message message--success">
+      Successfuly sended!
+    </p>
+  </div>
+  <div class="footer__copyright">
+    <p>Made by Hana Bláhová, 2021</p>
+  </div>
+</div>
